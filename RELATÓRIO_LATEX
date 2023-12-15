@@ -1,0 +1,434 @@
+%OBS.: NÃO ALTERE AS CONFIGURAÇÕES DESTE ARQUIVO, A NÃO SER QUE SAIBA O QUE ESTÁ FAZENDO
+%Esse template foi adaptado do template "Modelo de Relatório Final PIBIC IFPE v1.0" (https://www.overleaf.com/latex/templates/modelo-de-relatorio-final-pibic-ifpe-v1-dot-0/mcrwbqsnjwws) do autor Manoel Henrique para elaboração dos relatórios de práticas do IFPE Campus Pesqueira.
+%Autor: Christian Araujo
+%email: christian.araujo96@outlook.com
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				    % tamanho da fonte
+	openright,			    % capítulos começam em pág ímpar
+	oneside,			    % para impressão só no anverso. Oposto a twoside
+	a4paper,			    % tamanho do papel.
+    % -- opções do pacote abntex2 --
+    chapter=TITLE,         % Títulos em maiúsculas
+    sumario=tradicional,    % Sumário padrão memoir
+    % -- opções do pacote babel --
+	english,			    % idioma adicional para hifenização
+	brazil,				    % o último idioma é o principal do documento
+	]{abntex2}              % Personaliza a capa.
+
+% Pacotes fundamentais
+\usepackage{newtxtext,newtxmath}
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte de saída
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{booktabs}           % \toprule, \midrule e \bottomrule para tabelas
+% \usepackage[none]{hyphenat}
+% Sistema autor-data com títulos nas referências em negrito
+\usepackage[alf,abnt-etal-text=it,abnt-emphasize=bf]{abntex2cite}	
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage[portuguese,onelanguage,ruled,vlined]{algorithm2e}
+\usepackage{ragged2e}
+\usepackage{makecell}
+%\usepackage{cite}
+%\usepackage[portuguese]{babel}
+%\usepackage[fleqn]{amsmath}
+\usepackage{caption}
+\usepackage{etoolbox}
+\captionsetup{
+    justification = centering,
+    singlelinecheck = false,
+    labelsep = endash,
+    font = bf, % Define negrito para a caption e normal para o texto
+}
+\usepackage{soul}
+\usepackage{hyperref}
+
+% FONTE PADRÃO
+% A Fonte deve ser ARIAL. Deve-se usar o XeLaTeX
+%\usepackage{fontspec}
+%\setmainfont{Arial}
+%\newcommand{\XPT}{\@setfontsize\xpt{10}{14}\centering} %fonte 10pt
+%\newcommand{\XIPT}{\@setfontsize\xipt{11}{15}} %fonte 11pt
+%\newcommand{\XIVPT}{\@setfontsize\xivpt{14}{18}} %fonte 14pt
+%\newcommand{\XVIPT}{\@setfontsize\xvipt{16}{20}} %fonte 16pt
+
+\floatstyle{plaintop}
+\newfloat{mapa}{h!btp}{mapa}\floatname{mapa}{Mapa}
+\newcommand{\mapaautorefname}{Mapa}
+\newfloat{diagrama}{h!btp}{diagrama}\floatname{diagrama}{Diagrama}
+\newcommand{\diagramaautorefname}{Diagrama}
+\newfloat{fluxograma}{h!btp}{fluxograma}\floatname{fluxograma}{Fluxograma}
+\newcommand{\fluxogramaautorefname}{Fluxograma}
+\newfloat{figura}{h!btp}{figura}\floatname{figura}{Figura}
+\newcommand{\figuraautorefname}{Figura}
+\newfloat{quadro}{h!btp}{quadro}\floatname{quadro}{Quadro}
+\newcommand{\quadroautorefname}{Quadro}
+\newfloat{grafico}{h!btp}{grafico}\floatname{grafico}{Gráfico}
+\newcommand{\graficoautorefname}{Gráfico}
+\newfloat{tabela}{h!btp}{tabela}\floatname{tabela}{Tabela}
+\newcommand{\tabelaautorefname}{Tabela}
+
+\newenvironment{citacaodireta}{
+\vspace*{8mm} \setlength{\parindent}{0cm}
+\hfill \begin{minipage}{140mm}
+%\XIPT 
+}{
+\vspace*{8mm} \end{minipage}
+}
+
+
+%\usepackage[style=abnt]{biblatex}
+%\usepackage{csquotes}
+%\usepackage{url}
+%retira o número do capítulo da numeração da equação
+\counterwithout{equation}{chapter}
+
+%dformata os títulos dos capítulos
+\renewcommand*{\chapnumfont}{\normalfont\bfseries\sffamily}
+\renewcommand*{\chaptitlefont}{\normalfont\bfseries\sffamily}
+% \renewcommand*{\secnumfont}{\normalfont\bfseries\sffamily}
+% \renewcommand*{\sectitlefont}{\normalfont\bfseries\sffamily}
+% \renewcommand*{\subsecnumfont}{\normalfont\bfseries\sffamily}
+% \renewcommand*{\subsectitlefont}{\normalfont\bfseries\sffamily}
+\setsecheadstyle{\normalfont\bfseries\sffamily\upcase}
+\setsubsecheadstyle{\normalfont\bfseries\sffamily\upcase}
+\setsubsubsecheadstyle{\normalfont\bfseries\sffamily\upcase}
+\setlength{\afterchapskip}{0.5cm}
+\setlength{\aftersecskip}{0.5cm}
+
+% Ajusta as margens
+\setlrmarginsandblock{2,5cm}{2,5cm}{*}
+\setulmarginsandblock{2,5cm}{2,5cm}{*}
+\checkandfixthelayout
+
+% Ajusta identação do parágrafo
+\setlength{\parindent}{0.75cm}
+
+% Ajusta o espaçamento entre um parágrafo e outro
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% Configurações de aparência do PDF final
+
+% informações para o arquivo pdf de saída
+% Interessante alterar a cor dos links para preto(black)
+% para imprimir
+\hypersetup{
+        % metadados
+		pdftitle={relatório de atividades na última semana de provas no IFNMG em 2023},
+		pdfauthor={IFPE},
+    	%pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		colorlinks=true,   % false: links em frame; true: links coloridos
+    	linkcolor=black,    % cor dos links no documento
+    	citecolor=black,    % cor dos links para a bibliografia
+    	filecolor=magenta, % cor dos links para arquivos
+		urlcolor=black,     % cor dos links para sites
+		bookmarksdepth=4   % profundidade do sumário do PDF
+}
+\begin{document}
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing
+\pagenumbering{gobble}
+
+%Alunos
+\newcommand{\alunoa}{ANTÔNIO MENEZES SILVA JUNIOR}
+
+
+%Nome dos alunos em caixa alta
+\newcommand{\alunoaM}{\MakeUppercase{\alunoa}}
+
+
+%Identificação do curso
+\newcommand{\tipo}{Bacharelado} %Informar se é bacharelado ou licenciatura
+\newcommand{\tipoe}{{\tipo} }
+\newcommand{\tipoM}{\MakeUppercase{\tipo}}
+\newcommand{\tipoME}{{\tipoM} }
+\newcommand{\curso}{Ciência da Computação}
+\newcommand{\cursoe}{{\curso} }
+\newcommand{\cursoM}{\MakeUppercase{\curso}}
+\newcommand{\cursoME}{{\cursoM} }
+
+%Nome da disciplina
+\newcommand{\disciplina}{Metodologia Científica}
+\newcommand{\disciplinae}{{\disciplina} }
+\newcommand{\disciplinaM}{\MakeUppercase{\disciplina}}
+\newcommand{\disciplinaME}{{\disciplinaM} }
+
+%Nome do professor da disciplina
+\newcommand{\professor}{Marcos Aurelio Duarte Carvalho }
+\newcommand{\professore}{{\professor} }
+\newcommand{\professorM}{\MakeUppercase{\professor}}
+\newcommand{\professorME}{{\professorM} }
+
+%Tema das atividades trabalhadas no relatório
+\newcommand{\atividades}{Atividades na última semana de provas no IFNMG em 2023}
+\newcommand{\atividadesM}{\MakeUppercase{\atividades}}
+\newcommand{\atividadesMN}{\textbf{\atividadesM}}
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+\pretextual
+
+
+
+% Capa
+%\begin{titlepage}
+
+\begin{center}
+\includegraphics[width=0.2\textwidth]{figuras/logoifnmg.eps}
+
+\resizebox{!}{0.35cm}{\textbf{INSTITUTO FEDERAL DO NORTE DEMINAS}}\\
+
+\textbf{\textit{CAMPUS} MONTES CLAROS}
+% Identificacao da coordenação de curso
+\resizebox{!}{0.35cm}{\textbf{\uppercase{{Coordenação de curso de \tipoME em \cursoM}}}}\\
+
+% Identificacao da disciplina
+\textbf{\disciplinaM}\\
+
+\vspace{4cm}
+
+% Identificacao das atividades trabalhadas no relatório 
+\atividadesMN\\[5cm]
+
+% Nome dos alunos na capa
+% O documento foi feito para suportar até 6 alunos. Caso não use todos, colocar um símbolo de "%" antes das respectivas linhas.
+\textbf{\alunoaM} % Aluno 1
+
+
+\end{center}
+
+\vspace{0.2cm}
+\hfill
+\begin{minipage}{7cm}
+
+
+\end{minipage}
+
+\begin{center}
+\vfill
+\vspace{0.2cm}
+
+\textbf{MONTES CLAROS - MG} \\
+
+\textbf{\the\year}
+
+\end{center}
+\clearpage
+%\end{titlepage}
+
+% ----------------------------------------------------------
+% Folha de rosto
+% ----------------------------------------------------------
+%\begin{titlepage}
+
+\begin{center}
+
+
+% Nome dos alunos na folha de rosto
+% O documento foi feito para suportar até 6 alunos. Caso não use todos, colocar um símbolo de "%" antes das respectivas linhas.
+\textbf{\alunoaM} % Aluno 1
+
+\vspace{4cm}
+
+% Identificacao das atividades trabalhadas no relatório 
+\atividadesMN\\[5cm]
+
+\end{center}
+
+\vspace{0.2cm}
+\hfill
+\begin{minipage}{7cm}
+
+Relatório de minhas atividades na última semana de provas no IFNMG em 2023 \disciplinae do IFNMG \textit{Campus Pesqueira}, sob orientação do Prof. \professor.
+
+\end{minipage}
+
+\begin{center}
+\vfill
+\vspace{0.2cm}
+
+\textbf{MONTES CLAROS - MG } \\
+
+\textbf{\the\year}
+
+\end{center}
+\clearpage
+%\end{titlepage}
+
+% ----------------------------------------------------------
+% Resumo
+% ----------------------------------------------------------
+\noindent\resizebox{!}{0.3cm}{\textbf{RESUMO}}\\
+% O resumo é um elemento obrigatório apresentado em um único parágrafo. Indica os principais assuntos abordados, apresentando o(s) objetivo(s), o método, os resultados e as considerações finais sem citação bibliográfica ou abreviação não definida. Na sua extensão deve conter no mínimo 100 e no máximo 250 palavras. Segundo a norma da Associação Brasileira de Normas Técnicas (ABNT) NBR 6028 (2003, seção 3.3.4) ``devem-se evitar símbolos e contrações que não sejam de uso corrente'' como também ``fórmulas, equações, diagramas etc..., que não sejam absolutamente necessários; quando seu emprego for imprescindível, defini-los na primeira vez que aparecerem''.
+
+\noindent Como foi a última semana de provas e atividades avaliativa no curso Bacharelado em ciência da computação vivenciados por mim. Semana 11 a 15 de dezembro de 2023, onde várias atividades sofram solicitadas anteriormente, mas com um curto prazo para desenvolvimento e entrega na mesma semana de prova. Com isso foi afetado a qualidade dos trabalhos a ser entregue e muita dificuldade para fazer as provas. Mas com tudo espero ter alcançado os objetivos e adquirido experiencia para que eu possa está melhorando no próximo semestre.   
+
+\noindent Palavras-chave: prova, entrega, trabalhos, dificuldades, aprendizado\\ % No máximo 5 palavras-chave
+
+\noindent\textbf{ABSTRACT}
+\vspace{0.5cm}
+
+\noindent How was the last week of exams and evaluative activities in the Bachelor's degree in Computer Science course experienced by me. Week of December 11th to 15th, 2023, where several activities had been requested earlier, but with a short deadline for development and submission in the same exam week. As a result, the quality of the work to be submitted was affected, and there was a lot of difficulty in completing the exams. Despite everything, I hope to have achieved the objectives and gained experience so that I can improve in the next semester.
+
+\noindent 
+Keywords: exam, submission, assignments, challenges, learning
+\\
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+%\vspace{0.5cm}
+
+\gdef\clearforchapter{}
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+\chapter{Introdução}\label{chapter:introducao}
+
+Na tumultuada semana de 11 a 15 de dezembro de 2023, vivenciei os desafios das provas e atividades avaliativas no curso de Bacharelado em Ciência da Computação. A intensidade dessa semana foi agravada pela prévia solicitação de diversas tarefas, cada uma exigindo desenvolvimento ágil e entrega no mesmo período de provas. Esse prazo apertado impactou significativamente a qualidade dos trabalhos, resultando em consideráveis dificuldades tanto na conclusão das tarefas quanto na realização das próprias provas. Apesar desses obstáculos, minha sincera esperança é ter alcançado com êxito os objetivos estabelecidos e adquirido experiências valiosas, preparando o terreno para melhorias no próximo semestre. Este relato explora as complexidades da semana de exames, destacando as palavras-chave: prova, entrega, trabalhos, dificuldades e aprendizado.
+
+O desafio de conciliar os estudos no curso de Bacharelado em Ciência da Computação com outras responsabilidades da vida adulta tornou-se uma jornada multifacetada. Para muitos alunos, a semana de exames é apenas um reflexo de um cotidiano repleto de complexidades. Estudar enquanto trabalha demanda uma habilidade excepcional de gerenciamento de tempo, pois a busca pelo equilíbrio entre o compromisso acadêmico e as obrigações profissionais é constante.
+
+Além disso, para aqueles que são casados e têm filhos, a equação se torna ainda mais desafiadora. A exigência de ser um parceiro ou parceira atencioso(a) e um pai ou mãe presente soma-se aos compromissos acadêmicos e profissionais. A semana de provas muitas vezes representa o ápice desse malabarismo, onde a atenção dividida entre a família, o trabalho e os estudos atinge seu ponto mais crítico.
+
+A condução de diversas atividades simultâneas impõe não apenas desafios práticos, mas também desafios emocionais. A pressão de desempenho acadêmico se entrelaça com a responsabilidade de sustentar a família, criando um ambiente propício para o estresse e a ansiedade. O malabarismo entre os papéis de aluno, profissional, cônjuge e pai ou mãe demanda uma resiliência extraordinária.
+
+No entanto, é fundamental reconhecer que, apesar das dificuldades, muitos alunos enfrentam esses obstáculos com determinação e perseverança. A superação desses desafios não apenas fortalece a base acadêmica, mas também constrói habilidades valiosas de gestão, adaptabilidade e resolução de problemas, essenciais para o sucesso tanto na vida acadêmica quanto na profissional e pessoal.
+
+\vspace{0.5cm}
+% ----------------------------------------------------------
+% Objetivos
+% ----------------------------------------------------------
+\chapter{Objetivos}\label{chapter:objetivos}
+
+Diante das adversidades apresentadas nos relatos acima, estabelece-se um objetivo fictício que busca a conquista do equilíbrio nas múltiplas esferas da vida de um aluno do curso de Bacharelado em Ciência da Computação. O desafio consiste em harmonizar com destreza as demandas acadêmicas, profissionais e pessoais, procurando não apenas enfrentar, mas transcender as dificuldades inerentes a essa jornada multifacetada.
+
+\vspace{0.5cm}
+%
+% ----------------------------------------------------------
+% Materiais e Métodos
+% ----------------------------------------------------------
+\chapter{materiais e métodos}\label{chapter:materiais e metodos}
+
+\begin{itemize}
+    \item Material utilizado na semana: livros online disponibilizados pela biblioteca do IFNMG;
+    \item Aulas teoricas,;
+    \item lista de exercicios e pesquisas exploratoria do conteudo.
+    \item  links de internet com conteudo abordado em sala, mas com didatica diferente.
+\end{itemize}
+
+\noindent\textbf{Plano de Estudos Estruturado:}
+
+Desenvolver um plano de estudos detalhado, incluindo horários específicos para cada disciplina e revisões.
+Utilizar técnicas de gerenciamento de tempo, como a técnica Pomodoro, para maximizar a concentração durante os períodos de estudo.
+\noindent\textbf{Definição de Prioridades:}
+
+Identificar prioridades semanais, destacando tarefas acadêmicas, profissionais e familiares essenciais para o período.
+Empregar ferramentas de organização, como listas de tarefas e agendas, para visualizar e acompanhar as prioridades.
+Resolução de Problemas Gradual:
+
+Abordar desafios um de cada vez, priorizando a resolução gradual e escalonada de problemas.
+Buscar apoio de professores, colegas e familiares para compartilhar experiências e estratégias de superação.
+Materiais de Apoio:
+
+\noindent\textbf{Aplicativos de Organização:}
+
+Utilizar aplicativos de organização, como Todoist ou Trello, para gerenciar tarefas acadêmicas e pessoais.
+Incorporar aplicativos de rastreamento de tempo para avaliar e ajustar o uso eficiente do tempo.
+
+\noindent\textbf{Recursos Online:}
+
+Explorar plataformas online que oferecem recursos de aprendizagem, como vídeos explicativos, cursos e materiais suplementares.
+Participar de fóruns acadêmicos e grupos de discussão para compartilhar conhecimentos e obter suporte.
+
+\noindent\textbf{Materiais de Autoajuda:}
+
+Ler livros e artigos sobre gestão do tempo, resiliência e equilíbrio entre trabalho e vida pessoal.
+Incorporar práticas de mindfulness e técnicas de relaxamento para promover o bem-estar emocional.
+
+\noindent\textbf{Networking e Compartilhamento:}
+
+Participar de eventos acadêmicos, workshops e grupos de estudo para ampliar a rede de contatos e compartilhar experiências.
+Estabelecer uma comunicação aberta com a família, colegas de trabalho e professores para obter apoio e compreensão.
+
+A combinação de métodos estruturados e materiais de apoio proporcionará um suporte sólido para alcançar o equilíbrio desejado, capacitando o estudante a enfrentar os desafios do curso de Bacharelado em Ciência da Computação enquanto mantém uma vida equilibrada e gratificante.
+
+\vspace{0.5cm}
+% ----------------------------------------------------------
+% Resultados e discussões
+% ----------------------------------------------------------
+\chapter{Resultados e Discussões}\label{chapter:resultados}
+
+Os resultados deverão ser apresentados na forma de diagramas, figuras, fluxogramas, gráficos, quadros, mapas e tabelas, quando for o caso, seguida de discussão técnica e crítica sobre os mesmos. Qualquer material gráfico que não esteja na forma de tabela é designado de figura. Qualquer tabela ou figura deve ser obrigatoriamente, e previamente, citada no texto, além de ser devidamente numerada em sequência. 
+
+%Nesse documento foram definidos os ambientes: diagrama, figura, fluxograma, gráfico, mapa, quadro e tabela.
+
+%Para inserir uma figura, faça o upload dela para a pasta figuras. Em seguida, podes observar e seguir o exemplo abaixo.
+
+\begin{figura}[h!bt]
+	\caption{a) grafico de desmpenho das atividades}
+	\begin{center}
+	    \includegraphics[scale=0.65]{figuras/grafico.eps}
+	\end{center}
+    \label{grafico}
+	\centering Fonte: \citeonline{canvas}
+\end{figura}
+
+
+\noindent \textbf{Tabelas}
+
+
+\begin{tabela}[h!b!tp]
+    \caption{Pessoas residentes em domicílios particulares, por sexo e situação do domicílio - Brasil - 1980}
+    \begin{center}
+        \begin{tabular}{lccc>{\centering\arraybackslash}p{1.8cm}c}
+        \specialrule{2pt}{0pt}{1pt}
+        \hline
+        MATERIA        & EXERCICIOS  & TRABALHOS  & PROVAS \\
+        \specialrule{1pt}{1pt}{1pt}
+        GAAL           & 2           & 1          & 2 \\
+        AC1            & 8           & 1          & 3 \\
+        FISICA         & 4           & 2          & 0 \\
+        METODOLOGIA    & 1           & 5          & 0 \\
+        \specialrule{2pt}{0pt}{0pt}
+        \hline
+        \end{tabular}\\
+    \end{center}
+    \centering ANTONIO MENEZES (2023)
+    \label{tab:Residentes}
+\end{tabela}
+
+ 
+\\
+% ----------------------------------------------------------
+% Conclusões
+% ----------------------------------------------------------
+\chapter{Conclusões}\label{chapter:conclusoes}
+
+Em conclusão, a pesquisa sobre o desafio de equilibrar as demandas do curso de Bacharelado em Ciência da Computação com responsabilidades profissionais, familiares e pessoais revela uma paisagem complexa, na qual os estudantes enfrentam obstáculos significativos. A semana de exames, em particular, emerge como um ponto crítico, evidenciando as dificuldades enfrentadas na gestão do tempo, na resolução de problemas e na busca por um equilíbrio sustentável.
+
+Ao explorar estratégias como o desenvolvimento de planos de estudo estruturados, a definição de prioridades e a resolução gradual de desafios, é possível vislumbrar um caminho para superar essas dificuldades. A utilização de materiais de apoio, como aplicativos de organização, recursos online e networking, oferece ferramentas valiosas para facilitar a jornada acadêmica e pessoal.
+
+O objetivo fictício estabelecido, "Equilíbrio Conquanto Desafio", demonstra a aspiração de muitos estudantes em alcançar não apenas o sucesso acadêmico, mas também uma harmonia entre as diversas facetas de suas vidas. O progresso registrado nos objetivos específicos reflete não apenas a conquista de metas individuais, mas também o crescimento pessoal e a capacidade de adaptação diante de desafios complexos.
+
+É imperativo reconhecer que a jornada de equilíbrio é contínua e dinâmica, sujeita a ajustes e aprendizados constantes. A resiliência demonstrada pelos estudantes ao enfrentar múltiplos papéis e responsabilidades é, em si mesma, uma conquista notável. Com a aplicação diligente das estratégias delineadas, aliada a um mindset resiliente, os estudantes podem não apenas superar as dificuldades encontradas, mas também prosperar e crescer durante sua jornada acadêmica e além.
+
+
+A próxima seção trata sobre as Referências Bibliográficas, É um elemento obrigatório, que consiste na relação das obras consultadas e citadas no texto, de maneira que permita a identificação individual de cada uma delas. Caso tenha colocado corretamente no arquivo ``\textit{referencias.bib}'' e citado em algum momento no texto, sua referência irá aparecer na já referida seção no formato ABNT, assim como podes verificar abaixo.
+
+Dito isso, eu acho que todas as dicas para apresentar esse modelo em LaTeX já foram feitas. Quaisquer outras dúvidas podem ser sanadas pelo meu \href{mailto:christian.araujo96@outlook.com}{e-mail}, Google, Bing, ChatGPT, Google Bard, YouTube, etc...
+\\
+
+% ----------------------------------------------------------
+% Referências
+% ----------------------------------------------------------
+%\chapter{Referências}\label{chapter:referencias}
+
+\end{document}
